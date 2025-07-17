@@ -1,7 +1,7 @@
-/*головна точка входу в React-додаток:
-1.Імпортує головний компонен App
-2.Створює React root (кореневий елемент)
-3.Рендерить додаток всередину DOM */
+// /*головна точка входу в React-додаток:
+// 1.Імпортує головний компонен App
+// 2.Створює React root (кореневий елемент)
+// 3.Рендерить додаток всередину DOM */
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -21,3 +21,4 @@ createRoot(document.getElementById("root")!).render(
     </QueryClientProvider>
   </StrictMode>
 );
+console.log("VITE_NOTEHUB_TOKEN:", import.meta.env.VITE_NOTEHUB_TOKEN);

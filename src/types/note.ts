@@ -1,9 +1,13 @@
-export interface Movie {
+export interface NoteTag {
+  name: string;
+  color: string;
+}
+
+export interface Note {
   id: number;
-  poster_path: string | null;
-  backdrop_path: string | null;
   title: string;
-  overview: string;
-  release_date: string;
-  vote_average: number;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+  tag?: string;
 }
