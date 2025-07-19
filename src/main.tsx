@@ -21,4 +21,3 @@ createRoot(document.getElementById("root")!).render(
     </QueryClientProvider>
   </StrictMode>
 );
-console.log("VITE_NOTEHUB_TOKEN:", import.meta.env.VITE_NOTEHUB_TOKEN);

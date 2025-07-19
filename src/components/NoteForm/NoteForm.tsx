@@ -5,10 +5,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createNote } from "../../services/noteService";
 import type { DataNewNotes } from "../../services/noteService";
 
+//Пропси, що відповідають за закриття модалки
 interface NoteFormProps {
   onClose: () => void;
 }
-
+//валідація форми за допомогою Yup
 const validationSchema = Yup.object({
   title: Yup.string()
     .min(3, "Мінімум 3 символи")
@@ -25,14 +26,15 @@ const validationSchema = Yup.object({
 export default function NoteForm({ onClose }: NoteFormProps) {
   const queryClient = useQueryClient();
 
+  // Хук для створення нової нотатки
   const mutation = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes"] });
+      queryClient.invalidateQueries({ queryKey: ["notes"] }); //оновлення даних після створення нотатки.
       onClose();
     },
   });
-
+  // Початкові значення для полів форми
   const initialValues: DataNewNotes = {
     title: "",
     content: "",
@@ -43,7 +45,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => mutation.mutate(values)}
+      onSubmit={(values) => mutation.mutate(values)} //викликає створення нотатки через API.
     >
       {({ isSubmitting }) => (
         <Form className={css.form}>

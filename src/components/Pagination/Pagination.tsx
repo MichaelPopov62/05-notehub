@@ -1,6 +1,7 @@
 import ReactPaginate from "react-paginate";
 import styles from "./Pagination.module.css";
 
+// Типи пропсів
 interface Props {
   pageCount: number;
   currentPage: number;
@@ -17,7 +18,7 @@ export default function Pagination({
   return (
     <ReactPaginate
       pageCount={pageCount}
-      forcePage={currentPage - 1} // ReactPaginate використовує індексацію з 0
+      forcePage={currentPage - 1}
       onPageChange={(event) => onPageChange(event.selected + 1)}
       containerClassName={styles.pagination}
       activeClassName={styles.active}

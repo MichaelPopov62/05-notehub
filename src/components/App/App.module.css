@@ -29,3 +29,11 @@
 .button:hover {
   background-color: #0b5ed7;
 }
+
+.noResults {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 40px;
+  color: #e60e0e;
+}

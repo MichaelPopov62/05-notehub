@@ -1,31 +1,33 @@
-// // /*отримує нотатки з бекенду (fetchNotes)
-// // враховує пошук*/
+//*отримує нотатки з бекенду (fetchNotes)
+// враховує пошук*/
 
 import type { Note } from "../../types/note";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteNote } from "../../services/noteService";
 import css from "./NoteList.module.css";
 
+// Типи пропсів
 interface NoteListProps {
-  notes: Note[];
+  notes: Note[]; // список нотатків
+  currentPage: number; //поточний стан
 }
 
-export default function NoteList({ notes }: NoteListProps) {
+export default function NoteList({ notes, currentPage }: NoteListProps) {
   const queryClient = useQueryClient();
 
+  // Налаштовання мутаціі для видалення нотатки
   const deleteMutation = useMutation({
     mutationFn: (id: string) => deleteNote(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["notes"] });
+      queryClient.invalidateQueries({ queryKey: ["notes", currentPage] });
     },
   });
-
-  if (notes.length === 0) return <p>Нотаток немає</p>;
 
   const handleDelete = (id: string | number) => {
     deleteMutation.mutate(id.toString());
   };
 
+  //Список нотатків
   return (
     <ul className={css.list}>
       {notes.map((note) => (
@@ -40,7 +42,7 @@ export default function NoteList({ notes }: NoteListProps) {
               onClick={() => handleDelete(note.id)}
               disabled={deleteMutation.isPending}
             >
-              Видалити
+              Delete
             </button>
           </div>
         </li>
