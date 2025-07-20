@@ -29,7 +29,7 @@ export default function NoteList({ notes }: NoteListProps) {
     },
   });
 
-  const handleDelete = (id: string | number) => {
+  const handleDelete = (id: number) => {
     deleteMutation.mutate(id.toString());
   };
 
@@ -50,7 +50,9 @@ export default function NoteList({ notes }: NoteListProps) {
                 onClick={() => handleDelete(note.id)}
                 disabled={deleteMutation.isPending}
               >
-                Delete
+                {/*користувач бачить зміну надпису кнопки якщо відбуваеться
+                видалення*/}
+                {deleteMutation.isPending ? "Deleting..." : "Delete"}
               </button>
             </div>
           </li>
