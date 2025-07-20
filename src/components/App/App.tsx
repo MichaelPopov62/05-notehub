@@ -23,6 +23,7 @@ export default function App() {
   // debounce-пошук
   const updateSearchQuery = useDebouncedCallback((newSearchQuery: string) => {
     setSearchQuery(newSearchQuery);
+    setCurrentPage(1);
   }, 300);
 
   // Запит нотаток
@@ -106,7 +107,7 @@ export default function App() {
 
         {/* Є нотатки */}
         {!showLoader && isSuccess && data?.notes.length > 0 && (
-          <NoteList notes={data.notes} currentPage={currentPage} />
+          <NoteList notes={data.notes} />
         )}
 
         {/* Пошук не дав результатів */}

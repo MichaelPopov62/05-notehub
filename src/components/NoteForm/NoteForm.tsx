@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./NoteForm.module.css";
@@ -25,13 +26,20 @@ const validationSchema = Yup.object({
 
 export default function NoteForm({ onClose }: NoteFormProps) {
   const queryClient = useQueryClient();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Хук для створення нової нотатки
   const mutation = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["notes"] }); //оновлення даних після створення нотатки.
+      setErrorMessage(null);
       onClose();
+    },
+    onError: (error: Error) => {
+      setErrorMessage(
+        error.message || " There was a mercy when the note was opened"
+      );
     },
   });
   // Початкові значення для полів форми
@@ -82,6 +90,7 @@ export default function NoteForm({ onClose }: NoteFormProps) {
             </Field>
             <ErrorMessage name="tag" component="span" className={css.error} />
           </div>
+          {errorMessage && <p className={css.error}>{errorMessage}</p>}
 
           <div className={css.actions}>
             <button

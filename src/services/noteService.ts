@@ -1,11 +1,6 @@
 import axios from "axios";
 import type { Note } from "../types/note";
 
-// Додаю штучну затримку, щоб бачити процеси
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 // Токен авторизації
 const VITE_NOTEHUB_TOKEN = import.meta.env.VITE_NOTEHUB_TOKEN;
 // Базова URL-адреса бекенду
@@ -22,7 +17,7 @@ export interface FetchNotesParams {
 export interface DataNewNotes {
   title: string;
   content: string;
-  tag?: string;
+  tag: string;
 }
 
 // Інтерфейс відповіді сервера при отриманні нотаток
@@ -50,9 +45,6 @@ export async function fetchNotes({
   });
 
   const data = response.data;
-
-  //Штучна затримка
-  await sleep(300);
 
   if (!data.notes || !Array.isArray(data.notes)) {
     return {

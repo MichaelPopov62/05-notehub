@@ -34,8 +34,8 @@
   color: #495057;
   margin-bottom: 12px;
   display: -webkit-box;
-  -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
@@ -74,4 +74,13 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.error {
+  color: #d62727;
+  background-color: #ffe5e5;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  text-align: center;
 }
